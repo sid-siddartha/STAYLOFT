@@ -1,0 +1,66 @@
+<nav
+  class="navbar navbar-expand-md bg-body-light border-bottom sticky-top bg-white"
+>
+  <div class="container-fluid full-nav">
+    <a class="navbar-brand" href="http://localhost:8080/listings">
+      <img src="/assets/stayloft_logo.png" alt="StayLoft Logo" height="40" />
+    </a>
+    
+    <div class="collapse navbar-collapse navbar-opt" id="navbarNavAltMarkup">
+      <div class="navbar-nav box-1">
+        <a class="nav-link home" href="/">Home</a>
+        <a class="nav-link" href="/listings">All Listings</a>
+      </div>
+      <div class="search-bar">
+        <form class="d-flex" role="search" method="GET" action="/listings">
+          <input
+            class="form-control me-2"
+            type="search"
+            name="search"
+            placeholder="Search destinations"
+            aria-label="Search"
+          />
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            &nbsp;&nbsp;&nbsp;&nbsp;Search
+          </button>
+        </form>
+      </div>
+      <div class="navbar-nav box-2">
+        <a class="nav-link book" href="/listings/new">Stayloft your home</a>
+        <div class="user-opt">
+          <% if(!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Signup</b></a>
+          <a class="nav-link" href="/login"><b>Login</b></a>
+          <% } %> <% if(currUser) { %>
+          <a class="nav-link" href="/logout"><b></b>Logout</a>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="reg-drop nav-item dropdown user-opt">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="accountDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Account
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="accountDropdown"
+        >
+          <% if (!currUser) { %>
+          <li><a class="dropdown-item" href="/signup">Signup</a></li>
+          <li><a class="dropdown-item" href="/login">Login</a></li>
+          <% } else { %>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

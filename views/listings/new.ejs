@@ -1,0 +1,143 @@
+<%layout("layouts/boilerplate")%>
+<div class="row">
+  <div class="col-8 offset-2 mt-3">
+    <h3>Create a new Listing</h3>
+    <form
+      action="/listings"
+      method="POST"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          name="listing[title]"
+          placeholder="Enter title"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Please Enter the Title</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="listing[description]"
+          placeholder="Enter description"
+          class="form-control no-resize"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Description should be valid</div>
+      </div>
+
+      <div class="mb-3">
+  <!-- <label for="category" class="form-label">Category</label>
+<div class="dropdown">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenuButton"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Select Category
+  </button>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="categoryDropdown">
+    <li class="dropdown-item" data-value="Trending">Trending</li>
+    <li class="dropdown-item" data-value="Beach front">Beach front</li>
+    <li class="dropdown-item" data-value="House boats">House boats</li>
+    <li class="dropdown-item" data-value="Earth homes">Earth homes</li>
+    <li class="dropdown-item" data-value="Tropical">Tropical</li>
+    <li class="dropdown-item" data-value="Amazing pools">Amazing pools</li>
+    <li class="dropdown-item" data-value="Rooms">Rooms</li>
+    <li class="dropdown-item" data-value="Top of the world">Top of the world</li>
+    <li class="dropdown-item" data-value="Lake">Lake</li>
+    <li class="dropdown-item" data-value="National parks">National parks</li>
+    <li class="dropdown-item" data-value="Design">Design</li>
+    <li class="dropdown-item" data-value="Amazing views">Amazing views</li>
+    <li class="dropdown-item" data-value="Top cities">Top cities</li>
+    <li class="dropdown-item" data-value="Caves">Caves</li>
+    <li class="dropdown-item" data-value="Tree house">Tree house</li>
+    <li class="dropdown-item" data-value="Country side">Country side</li>
+    <li class="dropdown-item" data-value="Cabins">Cabins</li>
+    <li class="dropdown-item" data-value="Farms">Farms</li>
+    <li class="dropdown-item" data-value="Bes and breakfast">Bes and breakfast</li>
+    <li class="dropdown-item" data-value="Actic">Actic</li>
+    <li class="dropdown-item" data-value="Islands">Islands</li>
+  </ul>
+</div> -->
+
+<!-- Hidden input used in form submission -->
+<!-- <input type="hidden" name="listing[category]" id="selectedCategory" required />
+<div class="invalid-feedback">Please select a category</div>
+
+<script> -->
+  <!-- // Attach click listeners to each dropdown item -->
+  <!-- document.querySelectorAll(".dropdown-item").forEach(item => {
+    item.addEventListener("click", function () {
+      const selectedValue = this.getAttribute("data-value");
+      
+      // Update hidden input
+      document.getElementById("selectedCategory").value = selectedValue;
+      
+      // Show selected value in button text
+      document.getElementById("dropdownMenuButton").textContent = selectedValue;
+    });
+  });
+</script> -->
+
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input
+          name="listing[image]"
+          type="file"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input
+            name="listing[price]"
+            placeholder="Enter price"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Price should be valid</div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            name="listing[country]"
+            placeholder="Enter country"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Country should be valid</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          name="listing[location]"
+          placeholder="Enter location"
+          type="text"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Location should be valid</div>
+      </div>
+      <button class="btn all-btns mt-3">Add</button>
+    </form>
+    <br />
+  </div>
+</div>

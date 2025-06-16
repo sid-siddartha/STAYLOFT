@@ -1,0 +1,189 @@
+<%layout("layouts/boilerplate")%>
+<!-- Filter Bar -->
+<div class="filter-scroll-container">
+  <button class="scroll-btn left" onclick="scrollFilters('left')">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M15 18l-6-6 6-6"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+  <div class="filter-scroll-wrapper" id="scrollWrapper">
+    <div id="filters">
+      <div class="filter" data-category="Trending">
+        <img src="/assets/tranding.jpg" alt="Trending" />Trending
+      </div>
+      <div class="filter" data-category="Beach front">
+        <img src="/assets/beach front.jpg" alt="Beach front" />Beach front
+      </div>
+      <div class="filter" data-category="House boats">
+        <img src="/assets/house boats.jpg" alt="House boats" />House boats
+      </div>
+      <div class="filter" data-category="Earth homes">
+        <img src="/assets/earth homes.jpg" alt="Earth homes" />Earth homes
+      </div>
+      <div class="filter" data-category="Tropical">
+        <img src="/assets/tropical.jpg" alt="Tropical" />Tropical
+      </div>
+      <div class="filter" data-category="Amazing pools">
+        <img src="/assets/amazing pools.jpg" alt="Amazing pools" />Amazing pools
+      </div>
+      <div class="filter" data-category="Rooms">
+        <img src="/assets/rooms.jpg" alt="Rooms" />Rooms
+      </div>
+      <div class="filter" data-category="Top of the world">
+        <img src="/assets/top_of_the_world.jpg" alt="Top of the world" />Top of
+        the world
+      </div>
+      <div class="filter" data-category="Lake">
+        <img src="/assets/lake.jpg" alt="Lake" />Lake
+      </div>
+      <div class="filter" data-category="National parks">
+        <img src="/assets/national parks.jpg" alt="National parks" />National
+        parks
+      </div>
+      <div class="filter" data-category="Design">
+        <img src="/assets/design.jpg" alt="Design" />Design
+      </div>
+      <div class="filter" data-category="Amazing views">
+        <img src="/assets/amazing views.jpg" alt="Amazing views" />Amazing views
+      </div>
+      <div class="filter" data-category="Top cities">
+        <img src="/assets/top_cities.jpg" alt="Top cities" />Top cities
+      </div>
+      <div class="filter" data-category="Caves">
+        <img src="/assets/caves.jpg" alt="Caves" />Caves
+      </div>
+      <div class="filter" data-category="Tree house">
+        <img src="/assets/tree house.jpg" alt="Tree house" />Tree house
+      </div>
+      <div class="filter" data-category="Country side">
+        <img src="/assets/country side.jpg" alt="Country side" />Country side
+      </div>
+      <div class="filter" data-category="Cabins">
+        <img src="/assets/cabins.jpg" alt="Cabins" />Cabins
+      </div>
+      <div class="filter" data-category="Farms">
+        <img src="/assets/farms.png" alt="Farms" />Farms
+      </div>
+      <div class="filter" data-category="Bes and breakfast">
+        <img src="/assets/bes and breakfast.jpg" alt="Bes and breakfast" />Bes
+        and breakfast
+      </div>
+      <div class="filter" data-category="Actic">
+        <img src="/assets/actic.jpg" alt="Actic" />Actic
+      </div>
+      <div class="filter" data-category="Islands">
+        <img src="/assets/islands.jpg" alt="Islands" />Islands
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-btn right" onclick="scrollFilters('right')">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M9 6l6 6-6 6"
+        stroke="black"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+      />
+      <label class="form-check-label" for="switchCheckDefault"
+        >Display Total after taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+  <% for (let listing of allListings) { %>
+  <div class="col mb-4" data-category="<%= listing.category %>">
+    <!-- NEW: wrap in .col -->
+    <a
+      href="/listings/<%= listing._id %>"
+      class="text-decoration-none text-dark"
+    >
+      <div class="card">
+        <img
+          src="<%= listing.image.url %>"
+          class="card-img-top"
+          alt="listing_image"
+        />
+        <div class="card-img-overlay"></div>
+        <!-- overlay -->
+        <div class="card-body">
+          <p class="card-text">
+            <b><%= listing.title %></b><br />
+            &#8377;<%= listing.price.toLocaleString("en-IN") %>
+            <i class="tax-info">&nbsp;&nbsp;+18%GST</i>
+          </p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <!-- close .col -->
+  <% } %>
+</div>
+
+<!-- <form method="GET" action="/listings/new">
+        <button>Create New Listing</button>
+    </form> -->
+<script>
+  let taxSwitch = document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+    for (info of taxInfo) {
+      if (info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const filters = document.querySelectorAll(".filter");
+    const listings = document.querySelectorAll(".col.mb-4");
+
+    filters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        // 1. Mark filter as active
+        filters.forEach((f) => f.classList.remove("active"));
+        filter.classList.add("active");
+
+        // 2. Get selected category
+        const selectedCategory = filter.getAttribute("data-category");
+
+        // 3. Show/hide listings
+        listings.forEach((listing) => {
+          const listingCategory = listing.getAttribute("data-category");
+          if (
+            selectedCategory === "Trending" ||
+            listingCategory === selectedCategory
+          ) {
+            listing.style.display = "block";
+          } else {
+            listing.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
