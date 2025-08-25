@@ -55,21 +55,21 @@ router
     wrapAsync(listingController.destroyLisitng)
   );
 
-router.get('/listings', async (req, res) => {
-  const { search } = req.query;
-  let allListings;
+// router.get('/listings', async (req, res) => {
+//   const { search } = req.query;
+//   let allListings;
 
-  if (search) {
-    // Case-insensitive search using regex
-    allListings = await Listing.find({
-      title: { $regex: search, $options: 'i' }
-    });
-  } else {
-    allListings = await Listing.find({});
-  }
+//   if (search) {
+//     // Case-insensitive search using regex
+//     allListings = await Listing.find({
+//       title: { $regex: search, $options: 'i' }
+//     });
+//   } else {
+//     allListings = await Listing.find({});
+//   }
 
-  res.render('listings/index', { allListings }); // or your actual view
-});
+//   res.render('listings/index', { allListings }); // or your actual view
+// });
 
 
 
